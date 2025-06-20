@@ -721,6 +721,8 @@ class SchemaVisitor:
             return self._get_type(base_name)
 
         annotation, children = self._pop_annotation(list(node))
+        if not children:
+            return xsd_types.AnySimpleType()
         if children[0].tag == tags.simpleType:
             return self.visit_simple_type(children[0], node)
 
